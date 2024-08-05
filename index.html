@@ -18,7 +18,7 @@
             flex-direction: column;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             padding: 20px 40px;
@@ -26,6 +26,8 @@
             max-width: 400px;
             width: 100%;
             margin-bottom: 20px;
+            background: url('https://media.giphy.com/media/KHV6oSbtvAjTX7fQj4/giphy.gif') repeat;
+            background-size: cover;
         }
         h1 {
             color: #333;
@@ -49,24 +51,40 @@
             padding: 10px 20px;
             border-radius: 5px;
             display: inline-block;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
         a:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 91, 255, 0.5);
         }
         .feedback-button {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
         .feedback-button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
             transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+        }
+        .logo-button {
+            background: url('/mnt/data/E32D2DE9-0E44-4966-9A00-A48E8859EF07.png') no-repeat center;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .logo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         /* Modal styles */
         .modal {
@@ -118,17 +136,33 @@
             resize: none;
         }
         .feedback-container button {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
         .feedback-container button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
             transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+        }
+        .suggestion-logo {
+            background: url('https://cdn.discordapp.com/attachments/1269507795137331222/1269851653905977455/IMG_5229.png') no-repeat center;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .suggestion-logo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -141,14 +175,14 @@
             <li><a href="https://geradornitro.vercel.app" target="_blank">Gerador Nitro</a></li>
             <li><a href="https://soosgostosochecker.squareweb.app/" target="_blank">Check Nitro</a></li>
         </ul>
-        <button class="feedback-button" onclick="openModal()">Deixe sua Sugestão</button>
+        <button class="logo-button" onclick="openModal()"></button>
     </div>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content feedback-container">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Deixe sua Sugestão</h2>
+            <div class="suggestion-logo" onclick="openModal()"></div>
             <textarea id="feedback" placeholder="Escreva sua sugestão aqui..."></textarea>
             <button onclick="sendFeedback()">Enviar</button>
         </div>
