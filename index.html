@@ -7,22 +7,25 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background: url('/mnt/data/CB3180D1-D05E-402F-B7AD-0ADFE6F1CCD3.png') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
         .container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             padding: 20px 40px;
             text-align: center;
             max-width: 400px;
             width: 100%;
+            margin-bottom: 20px;
         }
         h1 {
             color: #333;
@@ -52,6 +55,41 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
+        .feedback-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .feedback-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .feedback-container textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            resize: none;
+        }
+        .feedback-container button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .feedback-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -64,5 +102,49 @@
             <li><a href="https://soosgostosochecker.squareweb.app/" target="_blank">Check Nitro</a></li>
         </ul>
     </div>
+    <div class="feedback-container">
+        <h2>Deixe sua Sugestão</h2>
+        <textarea id="feedback" placeholder="Escreva sua sugestão aqui..."></textarea>
+        <button onclick="sendFeedback()">Enviar</button>
+    </div>
+
+    <script>
+        function sendFeedback() {
+            const feedback = document.getElementById('feedback').value;
+            if (feedback.trim() === '') {
+                alert('Por favor, escreva uma sugestão antes de enviar.');
+                return;
+            }
+
+            const webhookURL = 'https://discord.com/api/webhooks/1269737783812165715/yzqtyY38zQcARtUQasC84qHKXnXhYPbzmuD35cp9zcAEBPuPFfkwiHmLMgxcZAhUccFQ';
+            const payload = {
+                embeds: [{
+                    title: "Nova Sugestão",
+                    description: feedback,
+                    color: 3447003
+                }]
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Sugestão enviada com sucesso!');
+                    document.getElementById('feedback').value = '';
+                } else {
+                    alert('Erro ao enviar sugestão. Tente novamente mais tarde.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar sugestão. Tente novamente mais tarde.');
+            });
+        }
+    </script>
 </body>
 </html>
