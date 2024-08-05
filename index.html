@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('/mnt/data/CB3180D1-D05E-402F-B7AD-0ADFE6F1CCD3.png') no-repeat center center fixed;
+            background: url('/mnt/data/0855DBBE-DEFF-4806-8305-A43579CE28B1.png') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -55,18 +55,58 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-        .feedback-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 20px 40px;
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
+        .feedback-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
         }
-        .feedback-container h2 {
-            color: #333;
-            margin-bottom: 20px;
+        .feedback-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 400px;
+            position: relative;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
         .feedback-container textarea {
             width: 100%;
@@ -101,14 +141,34 @@
             <li><a href="https://geradornitro.vercel.app" target="_blank">Gerador Nitro</a></li>
             <li><a href="https://soosgostosochecker.squareweb.app/" target="_blank">Check Nitro</a></li>
         </ul>
+        <button class="feedback-button" onclick="openModal()">Deixe sua Sugestão</button>
     </div>
-    <div class="feedback-container">
-        <h2>Deixe sua Sugestão</h2>
-        <textarea id="feedback" placeholder="Escreva sua sugestão aqui..."></textarea>
-        <button onclick="sendFeedback()">Enviar</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content feedback-container">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Deixe sua Sugestão</h2>
+            <textarea id="feedback" placeholder="Escreva sua sugestão aqui..."></textarea>
+            <button onclick="sendFeedback()">Enviar</button>
+        </div>
     </div>
 
     <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Open the modal
+        function openModal() {
+            modal.style.display = "flex";
+        }
+
+        // Close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Send feedback
         function sendFeedback() {
             const feedback = document.getElementById('feedback').value;
             if (feedback.trim() === '') {
@@ -136,6 +196,7 @@
                 if (response.ok) {
                     alert('Sugestão enviada com sucesso!');
                     document.getElementById('feedback').value = '';
+                    closeModal();
                 } else {
                     alert('Erro ao enviar sugestão. Tente novamente mais tarde.');
                 }
